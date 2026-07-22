@@ -44,8 +44,25 @@
     opacity:0.35;
   }
   .bg-fx svg{ position:absolute; }
-  .bg-fx .top{ top:-8%; right:-18%; width:70vw; max-width:520px; }
-  .bg-fx .bottom{ bottom:-10%; left:-20%; width:65vw; max-width:480px; transform:rotate(180deg); }
+  .bg-fx .top{
+    top:-8%; right:-18%; width:70vw; max-width:520px;
+    animation:driftTop 9s ease-in-out infinite;
+  }
+  .bg-fx .bottom{
+    bottom:-10%; left:-20%; width:65vw; max-width:480px; transform:rotate(180deg);
+    animation:driftBottom 11s ease-in-out infinite;
+  }
+  @keyframes driftTop{
+    0%, 100% { transform:translate(0,0); }
+    50% { transform:translate(-14px, 10px); }
+  }
+  @keyframes driftBottom{
+    0%, 100% { transform:rotate(180deg) translate(0,0); }
+    50% { transform:rotate(180deg) translate(14px, -10px); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bg-fx .top, .bg-fx .bottom{ animation:none; }
+  }
 
   main{
     position:relative;
@@ -147,6 +164,46 @@
   .pkg svg{ width:20px; height:20px; flex:none; color:var(--orange); }
   .pkg span{ font-size:13.5px; color:var(--ink); font-weight:500; }
 
+  .review-form{ padding:6px 2px 4px; }
+  .stars{
+    display:flex;
+    gap:4px;
+    justify-content:center;
+    margin-bottom:10px;
+  }
+  .stars .star{
+    background:none;
+    border:none;
+    font-size:26px;
+    line-height:1;
+    color:#d8d3c8;
+    cursor:pointer;
+    padding:2px;
+    transition:color 0.15s ease;
+  }
+  .stars .star.active{ color:var(--orange); }
+  .review-input{
+    width:100%;
+    font-family:'Montserrat',sans-serif;
+    font-size:13.5px;
+    color:var(--ink);
+    background:#f6f4ef;
+    border:1px solid var(--card-line);
+    border-radius:10px;
+    padding:11px 12px;
+    margin-bottom:10px;
+    resize:none;
+  }
+  .review-input::placeholder{ color:#9aa2a9; }
+  .review-textarea{ min-height:70px; font-family:'Montserrat',sans-serif; }
+  .review-status{
+    text-align:center;
+    font-size:12px;
+    margin:8px 0 0;
+    color:var(--navy);
+    min-height:14px;
+  }
+
   footer{
     margin-top:32px;
     text-align:center;
@@ -180,8 +237,7 @@
 
     <div class="buttons">
 
-      <!-- EDITABLE: pon aqui el numero de WhatsApp real del cliente, formato 521XXXXXXXXXX -->
-      <a class="btn btn-primary" href="5214428672145" target="_blank" rel="noopener">
+      <a class="btn btn-primary" href="https://wa.me/5214428672145?text=Hola%20PULKREN%2C%20quiero%20agendar%20un%20servicio" target="_blank" rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="#1a0d06"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.3 14.8l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 0 1 12 4zm-3.4 4.6c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.1.6.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.2l-.5.6c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.2-.5s0-.4-.1-.5c0-.2-.7-1.7-1-2.3-.2-.5-.4-.5-.6-.5z"/></svg>
         <span class="label">Escríbenos por WhatsApp</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#1a0d06" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
@@ -210,63 +266,140 @@
         </div>
       </div>
 
-      <!-- EDITABLE: pon aqui el link real de la pagina de Facebook del cliente -->
-      <a class="btn" href="#" target="_blank" rel="noopener">
-        <svg class="ic" viewBox="0 0 24 24" fill="#3b6ea0"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.3-2 2-2h1.6V2.1C16.3 2 15.1 2 13.9 2 11.2 2 9 3.6 9 6.9V10H6v4h3v8h4z"/></svg>
-        <span class="label">Síguenos en Facebook</span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
-      </a>
-
-      <!-- EJEMPLO: opciones extra que puede tener una biopage. Bórralas o llénalas según el cliente -->
-
-      <a class="btn" href="#" target="_blank" rel="noopener">
+      <a class="btn" href="https://www.instagram.com/urbanscarwash/" target="_blank" rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#c85a2e" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
         <span class="label">Síguenos en Instagram</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
       </a>
 
-      <a class="btn" href="#" target="_blank" rel="noopener">
+      <a class="btn" href="https://www.tiktok.com/@urbans.car.wash" target="_blank" rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2"><path d="M16 8.2a6 6 0 0 0 5 2.3V14a9 9 0 0 1-5-1.5V17a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3.2a2.8 2.8 0 1 0 2 2.7V2h3z"/></svg>
         <span class="label">Síguenos en TikTok</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
       </a>
 
+      <!-- EDITABLE: aun sin decidir si se queda. Pon el link real (ej. Google Maps con el area de cobertura) o borra este botón si no aplica -->
       <a class="btn" href="#" target="_blank" rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#3f6f8f" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
         <span class="label">Zona de servicio a domicilio</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
       </a>
 
-      <a class="btn" href="#" target="_blank" rel="noopener">
+      <button class="btn btn-packages" id="toggleReview" type="button">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#c99416" stroke-width="2"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.5 1.6-6.8L2.2 9l6.9-.7z"/></svg>
-        <span class="label">Ver reseñas de clientes</span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
-      </a>
+        <span class="label">Déjanos una reseña</span>
+        <svg class="ic chev" id="chevReview" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
 
-      <a class="btn" href="#" target="_blank" rel="noopener">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#2f8f74" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-        <span class="label">Agendar una cita</span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
-      </a>
-
-      <a class="btn" href="#" target="_blank" rel="noopener">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#5b6670" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
-        <span class="label">Visita nuestro sitio web</span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#8a97a3" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
-      </a>
+      <div class="packages" id="reviewPanel">
+        <div class="packages-inner review-form">
+          <div class="stars" id="starPicker">
+            <button type="button" class="star" data-value="1">★</button>
+            <button type="button" class="star" data-value="2">★</button>
+            <button type="button" class="star" data-value="3">★</button>
+            <button type="button" class="star" data-value="4">★</button>
+            <button type="button" class="star" data-value="5">★</button>
+          </div>
+          <input type="text" id="reviewName" class="review-input" placeholder="Tu nombre" maxlength="60">
+          <textarea id="reviewText" class="review-input review-textarea" placeholder="Cuéntanos cómo te fue con el servicio..." maxlength="400"></textarea>
+          <button type="button" class="btn btn-primary" id="submitReview" style="justify-content:center;">
+            <span class="label" style="text-align:center;">Enviar reseña</span>
+          </button>
+          <p id="reviewStatus" class="review-status"></p>
+        </div>
+      </div>
 
     </div>
 
     <footer><b>PULKREN</b> · Estética automotriz a domicilio</footer>
   </main>
 
-<script>
-  const btn = document.getElementById('togglePkg');
-  const panel = document.getElementById('pkgPanel');
+<!-- EDITABLE: reemplaza con la config real de tu proyecto Firebase (Firebase Console > Configuración del proyecto > Tus apps > SDK de Firebase) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    projectId: "TU_PROYECTO",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "TU_SENDER_ID",
+    appId: "TU_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ---- paquetes ----
+  const pkgBtn = document.getElementById('togglePkg');
+  const pkgPanel = document.getElementById('pkgPanel');
   const chev = document.getElementById('chev');
-  btn.addEventListener('click', () => {
-    panel.classList.toggle('open');
+  pkgBtn.addEventListener('click', () => {
+    pkgPanel.classList.toggle('open');
     chev.classList.toggle('open');
+  });
+
+  // ---- reseñas ----
+  const reviewBtn = document.getElementById('toggleReview');
+  const reviewPanel = document.getElementById('reviewPanel');
+  const chevReview = document.getElementById('chevReview');
+  reviewBtn.addEventListener('click', () => {
+    reviewPanel.classList.toggle('open');
+    chevReview.classList.toggle('open');
+  });
+
+  let selectedStars = 0;
+  const starButtons = document.querySelectorAll('#starPicker .star');
+  starButtons.forEach(starEl => {
+    starEl.addEventListener('click', () => {
+      selectedStars = parseInt(starEl.dataset.value, 10);
+      starButtons.forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value, 10) <= selectedStars);
+      });
+    });
+  });
+
+  const nameInput = document.getElementById('reviewName');
+  const textInput = document.getElementById('reviewText');
+  const statusEl = document.getElementById('reviewStatus');
+  const submitBtn = document.getElementById('submitReview');
+
+  submitBtn.addEventListener('click', async () => {
+    const name = nameInput.value.trim();
+    const comment = textInput.value.trim();
+
+    if (!selectedStars) {
+      statusEl.textContent = 'Selecciona una calificación.';
+      return;
+    }
+    if (!comment) {
+      statusEl.textContent = 'Escribe tu comentario.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Enviando...';
+
+    try {
+      await addDoc(collection(db, 'reviews'), {
+        name: name || 'Anónimo',
+        rating: selectedStars,
+        comment: comment,
+        approved: false,
+        createdAt: serverTimestamp()
+      });
+      statusEl.textContent = '¡Gracias por tu reseña!';
+      nameInput.value = '';
+      textInput.value = '';
+      selectedStars = 0;
+      starButtons.forEach(s => s.classList.remove('active'));
+    } catch (err) {
+      statusEl.textContent = 'No se pudo enviar. Intenta de nuevo.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 </script>
 
